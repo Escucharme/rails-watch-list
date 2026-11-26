@@ -1,0 +1,10 @@
+.btn-watch {
+  background: $accent;
+  border: none;
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 8px 18px;
+
+  &:hover, &:focus { background: darken($accent, 8%); color: white; }
+}

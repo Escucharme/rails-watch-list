@@ -1,0 +1,18 @@
+.navbar-watch {
+  background: $dark;
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-watch-brand {
+  color: white;
+  font-family: $headers-font;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: none;
+
+  i { color: $accent; margin-right: 6px; }
+  &:hover { color: white; }
+}

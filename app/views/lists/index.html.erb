@@ -1,14 +1,28 @@
-<div class="container">
-  <h1>Save any kind of movies</h1>
-  <p>Classic</p>
+<div class="banner">
+  <div class="container">
+    <h1>Save any kind of movies</h1>
+    <p>Build your own lists: classics, guilty pleasures, movies to watch with friends…</p>
+  </div>
 </div>
 
-<div>
-  <h2>My Lists</h2>
-  <% @lists.each do |list| %>
-  <%= link_to list.name, list_path(list.id) %>
-  <% end %>
+<div class="container py-5">
+  <h2 class="section-title">My lists</h2>
 
-  <%= link_to "Create list", new_list_path %>
+  <div class="lists-grid">
+    <% @lists.each do |list| %>
+      <% poster = list.movies.first&.poster_url %>
+      <%= link_to list_path(list), class: "list-card",
+                  style: (poster ? "background-image: url('#{poster}')" : nil) do %>
+        <div class="list-card-overlay">
+          <h3><%= list.name %></h3>
+          <span><%= pluralize(list.bookmarks.size, "movie") %></span>
+        </div>
+      <% end %>
+    <% end %>
 
+    <%= link_to new_list_path, class: "list-card list-card-new" do %>
+      <i class="fa-solid fa-plus"></i>
+      <span>Create a list</span>
+    <% end %>
+  </div>
 </div>

@@ -1,13 +1,42 @@
-<h1><%= @list.name %></h1>
-
-<% @list.bookmarks.each do |bookmark| %>
-  <div>
-    <h3><%= bookmark.movie.title %></h3>
-    <p><%= bookmark.comment %></p>
-    <%= link_to "Delete", bookmark_path(bookmark),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<div class="banner banner-small">
+  <div class="container">
+    <%= link_to lists_path, class: "back-link" do %>
+      <i class="fa-solid fa-arrow-left"></i> All lists
+    <% end %>
+    <h1><%= @list.name %></h1>
+    <p><%= pluralize(@list.bookmarks.size, "movie") %></p>
   </div>
-<% end %>
+</div>
 
-<%= link_to "Add a movie", new_list_bookmark_path(@list) %>
-<%= link_to "Back to lists", lists_path %>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="section-title mb-0">Movies</h2>
+    <%= link_to new_list_bookmark_path(@list), class: "btn btn-watch" do %>
+      <i class="fa-solid fa-plus"></i> Add a movie
+    <% end %>
+  </div>
+
+  <% if @list.bookmarks.empty? %>
+    <p class="empty-state">No movies in this list yet. Add your first one!</p>
+  <% else %>
+    <div class="movies-grid">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="movie-card">
+          <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>">
+          <div class="movie-card-body">
+            <div class="d-flex justify-content-between align-items-start gap-2">
+              <h3><%= bookmark.movie.title %></h3>
+              <span class="rating"><i class="fa-solid fa-star"></i> <%= bookmark.movie.rating %></span>
+            </div>
+            <p class="overview"><%= bookmark.movie.overview %></p>
+            <p class="comment"><i class="fa-solid fa-quote-left"></i> <%= bookmark.comment %></p>
+            <%= link_to bookmark_path(bookmark), class: "delete-link",
+                        data: { turbo_method: :delete, turbo_confirm: "Remove this movie from the list?" } do %>
+              <i class="fa-solid fa-trash"></i> Remove
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

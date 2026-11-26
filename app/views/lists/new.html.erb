@@ -1,4 +1,10 @@
-<%= simple_form_for @list do |f| %>
-<%= f.input :name %>
-<%= f.button :submit %>
-<% end %>
+<div class="container py-5">
+  <div class="form-card">
+    <h1>New list</h1>
+    <%= simple_form_for @list do |f| %>
+      <%= f.input :name, placeholder: "e.g. Girl Power" %>
+      <%= f.button :submit, "Create list", class: "btn btn-watch w-100" %>
+    <% end %>
+    <%= link_to "Cancel", lists_path, class: "cancel-link" %>
+  </div>
+</div>
