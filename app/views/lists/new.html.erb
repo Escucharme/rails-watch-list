@@ -3,6 +3,7 @@
     <h1>New list</h1>
     <%= simple_form_for @list do |f| %>
       <%= f.input :name, placeholder: "My top movies" %>
+      <%= f.input :photo, as: :file %>
       <%= f.button :submit, "Create list", class: "btn btn-watch w-100" %>
     <% end %>
     <%= link_to "Cancel", lists_path, class: "cancel-link" %>

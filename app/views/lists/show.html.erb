@@ -1,4 +1,7 @@
-<div class="banner banner-small">
+<% if @list.photo.attached? %>
+  <% banner_style = "background-image: url('#{cl_image_path(@list.photo.key)}')" %>
+<% end %>
+<div class="banner banner-small" style="<%= banner_style %>">
   <div class="container">
     <%= link_to lists_path, class: "back-link" do %>
       <i class="fa-solid fa-arrow-left"></i> All lists
